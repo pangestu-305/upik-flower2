@@ -1,0 +1,285 @@
+
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katalog Bunga Akrilik & Buket</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap');
+
+        /* [DESAIN BARU] Skema Warna Cerah & Modern */
+        :root {
+            --warna-gradasi: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --warna-teks-utama: #121212;
+            --warna-teks-sekunder: #555;
+            --warna-latar: #d512be;
+            --warna-putih: #FFFFFF;
+            --bayangan: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background-color: var(--warna-latar);
+            color: var(--warna-teks-utama);
+        }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+
+        /* [DESAIN BARU] Header dengan Latar Gradasi */
+        header {
+            text-align: center;
+            padding: 50px 20px;
+            background: var(--warna-gradasi);
+            color: var(--warna-putih);
+        }
+        header .profil {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            border: 5px solid var(--warna-putih);
+            box-shadow: var(--bayangan);
+            object-fit: cover;
+        }
+        header h1 {
+            font-weight: 800;
+            font-size: 3em;
+            margin: 20px 0 10px 0;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+        header p { font-size: 1.1em; opacity: 0.9; margin: 0; max-width: 500px; margin-left: auto; margin-right: auto; }
+
+        .section-title { text-align: center; font-weight: 800; font-size: 2.5em; margin-top: 50px; margin-bottom: 30px; }
+
+        #produk-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        /* [DESAIN BARU] Kartu Produk yang Bersih dan Modern */
+        .kartu-produk {
+            background-color: var(--warna-putih);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--bayangan);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .kartu-produk:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+        .kartu-produk img { width: 100%; height: 250px; object-fit: cover; display: block; }
+        .info-produk { padding: 25px; }
+        .info-produk h3 { font-size: 1.4em; margin: 0 0 10px 0; }
+        .info-produk .deskripsi { font-size: 0.95em; line-height: 1.6; margin-bottom: 15px; min-height: 50px; color: var(--warna-teks-sekunder); }
+        .info-produk .harga { font-size: 1.6em; font-weight: 800; color: var(--warna-teks-utama); }
+        .tombol-pesan {
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            background: var(--warna-gradasi);
+            color: var(--warna-putih);
+            text-align: center; padding: 15px; margin-top: 20px; border-radius: 10px;
+            text-decoration: none; font-weight: 700; transition: all 0.3s ease;
+        }
+        .tombol-pesan:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); }
+
+        /* [FITUR BARU] Style untuk Galeri Foto */
+        #galeri-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        .galeri-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .galeri-item img:hover {
+            transform: scale(1.05);
+            box-shadow: var(--bayangan);
+        }
+        
+        /* [FITUR BARU] Style untuk Modal/Lightbox Galeri */
+        #modal-galeri {
+            position: fixed; z-index: 1000; top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            display: none; /* Diubah oleh JS */
+            justify-content: center; align-items: center;
+        }
+        #modal-gambar {
+            max-width: 90%;
+            max-height: 80%;
+            border-radius: 10px;
+        }
+        .tombol-modal {
+            position: absolute;
+            color: white;
+            font-size: 3em;
+            cursor: pointer;
+            user-select: none;
+            transition: color 0.2s;
+        }
+        .tombol-modal:hover { color: #aaa; }
+        #tutup-modal { top: 20px; right: 35px; font-size: 2.5em; }
+        #prev-modal { left: 20px; }
+        #next-modal { right: 20px; }
+
+        /* [DESAIN BARU] Footer */
+        footer {
+            text-align: center; margin-top: 50px; padding: 40px 20px;
+            background-color: #e9ecef; color: var(--warna-teks-sekunder);
+        }
+        footer h3 { color: var(--warna-teks-utama); font-weight: 800; margin-top: 0; }
+        #sosmed-links a { color: var(--warna-teks-sekunder); text-decoration: none; font-size: 2em; margin: 0 15px; transition: all 0.3s ease; }
+        #sosmed-links a:hover {
+            background: var(--warna-gradasi);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transform: translateY(-5px);
+        }
+        footer .copyright { margin-top: 30px; font-size: 0.9em; }
+
+    </style>
+</head>
+<body>
+
+    <header><div id="info-toko"></div></header>
+
+    <main class="container">
+        <h2 class="section-title">Produk Pilihan Kami</h2>
+        <div id="produk-list"></div>
+    </main>
+    
+    <section class="container">
+        <h2 class="section-title">Galeri Karya Kami</h2>
+        <div id="galeri-list"></div>
+    </section>
+
+    <footer>
+        <h3>Hubungi Kami</h3>
+        <div id="sosmed-links"></div>
+        <p class="copyright"></p>
+    </footer>
+
+    <div id="modal-galeri">
+        <span class="tombol-modal" id="tutup-modal">&times;</span>
+        <span class="tombol-modal" id="prev-modal">&lsaquo;</span>
+        <img id="modal-gambar" src="" alt="Tampilan Galeri">
+        <span class="tombol-modal" id="next-modal">&rsaquo;</span>
+    </div>
+
+    <script>
+    // ##################################################################
+    // ###          BAGIAN YANG PALING PENTING & MUDAH DIEDIT         ###
+    // ##################################################################
+
+    const toko = {
+        nama: "Cantik Akrilik",
+        deskripsi: "Menjual Bunga Akrilik, Buket Uang, dan aneka hadiah spesial lainnya dari Kota Padang.",
+        gambarProfil: "images/profil-toko.jpg",
+        nomorWA: "6283186867841"
+    };
+
+    const produk = [
+        { nama: "Buket Bunga Akrilik Pink", deskripsi: "Buket bunga tulip dari akrilik premium, cocok untuk wisuda atau ulang tahun.", harga: "Rp 150.000", gambar: "imagesproduk1.jpg" },
+        { nama: "Buket Uang 10 Lembar", deskripsi: "Hadiah unik berupa buket berisi uang. Jumlah dan pecahan bisa disesuaikan.", harga: "Rp 125.000 (Jasa)", gambar: "images/produk2.jpg" },
+        { nama: "Bunga Akrilik Meja", deskripsi: "Hiasan bunga mawar akrilik dalam pot kecil, mempercantik meja kerja Anda.", harga: "Rp 85.000", gambar: "images/produk3.jpg" },
+        { nama: "Buket Coklat Spesial", deskripsi: "Kombinasi buket bunga flanel dengan aneka coklat favorit.", harga: "Rp 99.000", gambar: "images/produk4.jpg" }
+    ];
+
+    const sosialMedia = {
+        instagram: "https://www.instagram.com/_margi_p4?igsh=anVpaDdoeXF5c3I4",
+        facebook: "https://www.facebook.com/share/19mrd3SxXv/?mibextid=qi2Omg",
+        tiktok: "https://www.tiktok.com/@_______mrg?_t=ZS-8x3nA7m5vHE&_r=1",
+        twitter: "https://x.com/PangestuMa71248?t=biRSxwRyxt787saNtpg8LA&s=09"
+    };
+    
+    // [FITUR BARU] Daftar gambar untuk galeri Anda
+    const galeriGambar = [
+        "mawar-akrilik-.jpg", // Ganti dengan nama file gambar Anda
+        "images/galeri2.jpg",
+        "images/galeri3.jpg",
+        "images/galeri4.jpg",
+        "images/galeri5.jpg",
+        "images/galeri6.jpg"
+        // Tambahkan gambar sebanyak yang Anda mau
+    ];
+
+    // ##################################################################
+    // ###         KODE MESIN WEBSITE (JANGAN DIUBAH DI BAWAH)        ###
+    // ##################################################################
+    document.addEventListener("DOMContentLoaded", function() {
+        // Render Info Toko
+        document.getElementById('info-toko').innerHTML = `<img src="${toko.gambarProfil}" alt="Profil Toko" class="profil"><h1>${toko.nama}</h1><p>${toko.deskripsi}</p>`;
+
+        // Render Produk
+        let produkHTML = '';
+        produk.forEach(p => {
+            const pesanWhatsApp = `https://api.whatsapp.com/send?phone=${toko.nomorWA}&text=Halo%20${toko.nama},%20saya%20tertarik%20dengan%20produk%20*${p.nama}*.%20Apakah%20masih%20tersedia?`;
+            produkHTML += `<div class="kartu-produk"><img src="${p.gambar}" alt="${p.nama}"><div class="info-produk"><h3>${p.nama}</h3><p class="deskripsi">${p.deskripsi}</p><p class="harga">${p.harga}</p><a href="${pesanWhatsApp}" target="_blank" class="tombol-pesan"><i class="fa-brands fa-whatsapp"></i> Pesan Sekarang</a></div></div>`;
+        });
+        document.getElementById('produk-list').innerHTML = produkHTML;
+
+        // Render Sosial Media & Copyright
+        let sosmedHTML = '';
+        if (sosialMedia.facebook) sosmedHTML += `<a href="${sosialMedia.facebook}" target="_blank" title="Facebook"><i class="fa-brands fa-facebook"></i></a>`;
+        if (sosialMedia.instagram) sosmedHTML += `<a href="${sosialMedia.instagram}" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>`;
+        if (sosialMedia.tiktok) sosmedHTML += `<a href="${sosialMedia.tiktok}" target="_blank" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>`;
+        if (sosialMedia.twitter) sosmedHTML += `<a href="${sosialMedia.twitter}" target="_blank" title="Twitter"><i class="fa-brands fa-twitter"></i></a>`;
+        sosmedHTML += `<a href="https://wa.me/${toko.nomorWA}" target="_blank" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>`;
+        document.getElementById('sosmed-links').innerHTML = sosmedHTML;
+        document.querySelector('footer .copyright').innerHTML = `&copy; ${new Date().getFullYear()} ${toko.nama}. Dibuat dengan ❤️ di Padang.`;
+
+        // [FITUR BARU] Logika untuk Galeri Foto
+        const galeriContainer = document.getElementById('galeri-list');
+        const modal = document.getElementById('modal-galeri');
+        const modalImg = document.getElementById('modal-gambar');
+        const tutupModal = document.getElementById('tutup-modal');
+        const prevBtn = document.getElementById('prev-modal');
+        const nextBtn = document.getElementById('next-modal');
+        let currentImageIndex;
+
+        galeriGambar.forEach((src, index) => {
+            const item = document.createElement('div');
+            item.className = 'galeri-item';
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = `Galeri ${index + 1}`;
+            img.onclick = () => openModal(index);
+            item.appendChild(img);
+            galeriContainer.appendChild(item);
+        });
+
+        function openModal(index) {
+            currentImageIndex = index;
+            modalImg.src = galeriGambar[currentImageIndex];
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        function showPrevImage() {
+            currentImageIndex = (currentImageIndex === 0) ? galeriGambar.length - 1 : currentImageIndex - 1;
+            modalImg.src = galeriGambar[currentImageIndex];
+        }
+
+        function showNextImage() {
+            currentImageIndex = (currentImageIndex === galeriGambar.length - 1) ? 0 : currentImageIndex + 1;
+            modalImg.src = galeriGambar[currentImageIndex];
+        }
+
+        tutupModal.onclick = closeModal;
+        prevBtn.onclick = showPrevImage;
+        nextBtn.onclick = showNextImage;
+        modal.onclick = function(e) { if(e.target === modal) closeModal(); }; // Tutup modal jika klik di luar gambar
+    });
+    </script>
+</body>
+</html>
